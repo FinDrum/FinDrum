@@ -13,16 +13,27 @@ from crawler import Crawler
 
 class SecCrawler(Crawler):
     """
-    Download a ZIP archive published by the SEC, extract every JSON file
-    inside it, and yield a pandas DataFrame for each record with columns:
+    Download and parse SEC company facts ZIP archive.
 
-        - ``cik``         (str, 10-digit CIK zero-padded on the left)
-        - ``entity_name`` (str | None)
-        - ``facts``       (dict | None)
+    This class downloads a ZIP archive published by the SEC, extracts each
+    JSON file inside it, and yields a pandas DataFrame for each record with
+    the following columns:
 
-    Example
-    -------
-    >>> crawler = SecCrawler(url, "you@example.com")
+    - ``cik``         (str): 10-digit CIK zero-padded on the left.
+    - ``entity_name`` (str or None): Name of the entity.
+    - ``facts``       (dict or None): Financial facts data.
+
+    Parameters
+    ----------
+    email : str
+        Contact e-mail required by the SEC `User-Agent` policy.
+    url : str, optional
+        Public SEC URL pointing to a ZIP archive. If not provided, defaults
+        to the standard SEC company facts URL.
+
+    Examples
+    --------
+    >>> crawler = SecCrawler(email="you@example.com")
     >>> for df in crawler.fetch():
     ...     print(df.head())
     """
@@ -32,14 +43,6 @@ class SecCrawler(Crawler):
     _DEFAULT_CIK = "0000000000"
 
     def __init__(self, email: str, url: str = None) -> None:
-        """
-        Parameters
-        ----------
-        email : str
-            Contact e-mail required by the SEC `User-Agent` policy.
-        url : str, optional
-            Public SEC URL pointing to a ZIP archive.
-        """
         if not email:
             raise ValueError("email cannot be empty.")
 
@@ -49,16 +52,21 @@ class SecCrawler(Crawler):
 
     def fetch(self) -> Generator[pd.DataFrame, None, None]:
         """
-        Stream one :class:`pandas.DataFrame` per valid JSON found in the ZIP.
+        Stream one pandas DataFrame per valid JSON found in the ZIP archive.
 
-        The generator keeps memory usage low by loading and emitting each
-        record individually instead of materialising the entire archive at
+        This generator keeps memory usage low by loading and emitting each
+        record individually instead of materializing the entire archive at
         once.
 
         Yields
         ------
         pandas.DataFrame
-            A single-row DataFrame with *cik*, *entity_name* and *facts*.
+            A single-row DataFrame with columns: `cik`, `entity_name`, and `facts`.
+
+        Raises
+        ------
+        requests.HTTPError
+            If the HTTP request for the ZIP archive fails.
         """
         response = self._session.get(self._url, timeout=30)
         response.raise_for_status()
@@ -91,5 +99,19 @@ class SecCrawler(Crawler):
 
     @staticmethod
     def _extract_cik(filename: str) -> str:
+        """
+        Extract the Central Index Key (CIK) from a filename.
+
+        Parameters
+        ----------
+        filename : str
+            The filename from which to extract the CIK.
+
+        Returns
+        -------
+        str
+            The extracted 10-digit CIK, zero-padded on the left. If no CIK
+            is found, returns a default value of '0000000000'.
+        """
         match = SecCrawler._CIK_PATTERN.search(filename)
         return match.group(1).zfill(10) if match else SecCrawler._DEFAULT_CIK
