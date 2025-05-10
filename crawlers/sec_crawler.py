@@ -7,8 +7,9 @@ from typing import Generator
 
 import pandas as pd
 import requests
+import orjson
 
-from .crawler import Crawler
+from crawler import Crawler
 
 class SecCrawler(Crawler):
     """
@@ -30,7 +31,7 @@ class SecCrawler(Crawler):
     _CIK_PATTERN = re.compile(r"CIK(\d+)\.json$", re.IGNORECASE)
     _DEFAULT_CIK = "0000000000"
 
-    def __init__(self, email: str, url: str,) -> None:
+    def __init__(self, email: str, url: str = None) -> None:
         """
         Parameters
         ----------
@@ -69,7 +70,7 @@ class SecCrawler(Crawler):
 
                 try:
                     with archive.open(member) as file:
-                        raw_record = json.load(file)
+                        raw_record = orjson.loads(file.read())
 
                     yield pd.DataFrame(
                         [{
