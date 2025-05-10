@@ -40,7 +40,7 @@ class ParquetWriter(Writer):
     def __init__(self, client: DataClient):
         self._client = client
 
-    def write(self, path: str, data: pd.DataFrame) -> None:
+    def write(self, path: str, data: pd.DataFrame, engine: str = "fastparquet") -> None:
         """
         Write a pandas DataFrame to a Parquet file at the given path.
 
@@ -61,7 +61,7 @@ class ParquetWriter(Writer):
             return
 
         buffer = io.BytesIO()
-        data.to_parquet(buffer, engine="fastparquet", index=False)
+        data.to_parquet(buffer, engine=engine, index=False)
         buffer.seek(0)
 
         logging.debug("Uploading Parquet to %s", path)
