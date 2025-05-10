@@ -61,7 +61,7 @@ class ParquetWriter(Writer):
             return
 
         buffer = io.BytesIO()
-        data.to_parquet(buffer, index=False)
+        data.to_parquet(buffer, engine="fastparquet", index=False)
         buffer.seek(0)
 
         logging.debug("Uploading Parquet to %s", path)
