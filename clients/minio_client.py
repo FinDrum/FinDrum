@@ -1,5 +1,5 @@
 from minio import Minio
-from client import DataClient
+from .client import DataClient
 from typing import BinaryIO
 
 
