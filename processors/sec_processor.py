@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 
 import pandas as pd
 
-from processor import Processor
+from processors.processor import Processor
 
 class SecProcessor(Processor):
     _DEFAULT_FRAME_PREFIX: str = "CY"

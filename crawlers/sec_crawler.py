@@ -9,7 +9,7 @@ import pandas as pd
 import requests
 import orjson
 
-from crawler import Crawler
+from crawlers.crawler import Crawler
 
 class SecCrawler(Crawler):
     """

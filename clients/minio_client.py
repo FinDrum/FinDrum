@@ -1,6 +1,9 @@
-from minio import Minio
-from .client import DataClient
 from typing import BinaryIO
+
+from minio import Minio
+
+from clients.client import DataClient
+
 
 
 class MinioDataClient(DataClient):

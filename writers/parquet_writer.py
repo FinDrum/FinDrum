@@ -4,8 +4,8 @@ from typing import Final
 
 import pandas as pd
 
-from writer import Writer
-from ..clients.client import DataClient
+from writers.writer import Writer
+from clients.client import DataClient
 
 
 class ParquetWriter(Writer):
