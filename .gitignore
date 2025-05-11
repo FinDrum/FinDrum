@@ -1,0 +1,17 @@
+.venv
+__pycache__
+datalake
+test.ipynb
+
+*.csv
+*.zip
+benchmark_results
+
+build
+processors
+
+.coverage
+
+*.egg-info
+
+.pytest_cache
