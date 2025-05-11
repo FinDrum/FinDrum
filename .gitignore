@@ -2,3 +2,9 @@
 __pycache__
 datalake
 test.ipynb
+
+*.csv
+*.zip
+benchmark_results
+
+processors
