@@ -36,7 +36,7 @@ def test_fetch_yields_dataframes(mocked_response):
         df = dfs[0]
         assert isinstance(df, pd.DataFrame)
         assert list(df.columns) == ["cik", "entity_name", "facts"]
-        assert df.iloc[0]["cik"] == "0123456789"  # zero-padded
+        assert df.iloc[0]["cik"] == "0123456789"
         assert df.iloc[0]["entity_name"] == "Test Corp"
         assert isinstance(df.iloc[0]["facts"], dict)
 
