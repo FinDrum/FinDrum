@@ -1,6 +1,6 @@
 import io
 import logging
-from typing import Final
+from typing import Final, Optional, List
 
 import pandas as pd
 
@@ -31,8 +31,8 @@ class ParquetWriter(Writer):
     --------
     >>> client = LocalDataClient()
     >>> writer = ParquetWriter(client)
-    >>> df = pd.DataFrame({"x": [1, 2, 3]})
-    >>> writer.write("data/output/file.parquet", df)
+    >>> df = pd.DataFrame({"x": [3, 1, 2]})
+    >>> writer.write("data/output/file.parquet", df, sort_by=["x"])
     """
 
     _CONTENT_TYPE: Final[str] = "application/octet-stream"
@@ -40,17 +40,26 @@ class ParquetWriter(Writer):
     def __init__(self, client: DataClient):
         self._client = client
 
-    def write(self, path: str, data: pd.DataFrame, engine: str = "fastparquet") -> None:
+    def write(
+        self,
+        path: str,
+        data: pd.DataFrame,
+        engine: str = "fastparquet",
+        sort_by: Optional[List[str]] = None
+    ) -> None:
         """
         Write a pandas DataFrame to a Parquet file at the given path.
 
         Parameters
         ----------
         path : str
-            The destination path (e.g., file path or object key) where the Parquet file
-            will be written.
-        data : pandas.DataFrame
+            The destination path where the Parquet file will be stored.
+        data : pd.DataFrame
             The DataFrame to serialize and upload.
+        engine : str, default "fastparquet"
+            Parquet engine to use: 'pyarrow' or 'fastparquet'.
+        sort_by : list of str, optional
+            Columns to sort the DataFrame by before writing.
 
         Returns
         -------
@@ -59,6 +68,13 @@ class ParquetWriter(Writer):
         if data.empty:
             logging.warning("ParquetWriter skipped empty DataFrame (%s)", path)
             return
+
+        if sort_by:
+            missing = [col for col in sort_by if col not in data.columns]
+            if missing:
+                logging.warning("Sort skipped — columns not found in DataFrame: %s", missing)
+            else:
+                data = data.sort_values(by=sort_by)
 
         buffer = io.BytesIO()
         data.to_parquet(buffer, engine=engine, index=False)
