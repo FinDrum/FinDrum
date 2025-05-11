@@ -3,11 +3,18 @@ name: Run Tests
 on:
   push:
     branches: [main]
+    paths:
+      - 'findrum/**'
+      - 'tests/**'
   pull_request:
     branches: [main]
+    paths:
+      - 'findrum/**'
+      - 'tests/**'
 
 jobs:
   test:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
