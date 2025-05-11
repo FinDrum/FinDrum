@@ -13,3 +13,5 @@ processors
 .coverage
 
 *.egg-info
+
+.pytest_cache
