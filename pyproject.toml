@@ -10,9 +10,9 @@ authors = [{ name = "Óscar Rico Rodríguez" }]
 requires-python = ">=3.12"
 dependencies = [
     "pandas ~= 2.2.3",
+    "fastparquet ~= 2024.11.0",
     "requests ~= 2.32.3",
-    "yfinance ~= 0.2.57",
-    "pyaml ~= 25.1.0",
+    "yfinance ~= 0.2.59",
     "minio ~= 7.2.15",
     "pyarrow ~= 20.0.0"
 ]
