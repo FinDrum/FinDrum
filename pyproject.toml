@@ -17,6 +17,9 @@ dependencies = [
     "pyarrow ~= 20.0.0"
 ]
 
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov"]
+
 [tool.setuptools.packages.find]
 where = ["findrum"]
 exclude = ["tests*", "*.ipynb", ".venv*", "dist*", ".pytest_cache*"]
