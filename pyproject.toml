@@ -18,4 +18,5 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
+where = ["findrum"]
 exclude = ["tests*", "*.ipynb", ".venv*", "dist*", ".pytest_cache*"]

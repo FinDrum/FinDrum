@@ -7,4 +7,9 @@ test.ipynb
 *.zip
 benchmark_results
 
+build
 processors
+
+.coverage
+
+*.egg-info
