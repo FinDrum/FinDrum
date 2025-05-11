@@ -90,7 +90,7 @@ class SecProcessor(Processor):
             A list of dictionaries, each representing a flattened fact.
         """
         cik = row.get("cik")
-        entity_name = row.get("entityName")
+        entity_name = row.get("entity_name")
         facts = row.get("facts")
 
         if not facts:
