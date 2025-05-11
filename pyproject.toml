@@ -14,8 +14,12 @@ dependencies = [
     "requests ~= 2.32.3",
     "yfinance ~= 0.2.59",
     "minio ~= 7.2.15",
-    "pyarrow ~= 20.0.0"
+    "pyarrow ~= 20.0.0",
+    "orjson ~= 3.10.18"
 ]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov"]
 
 [tool.setuptools.packages.find]
 where = ["findrum"]
