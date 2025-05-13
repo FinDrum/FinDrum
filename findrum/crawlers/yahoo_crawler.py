@@ -7,7 +7,7 @@ import pandas as pd
 import yfinance as yf
 from yfinance.exceptions import YFRateLimitError
 
-from .crawler import Crawler
+from findrum.crawlers.crawler import Crawler
 
 
 class YahooCrawler(Crawler):

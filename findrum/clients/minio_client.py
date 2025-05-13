@@ -2,7 +2,7 @@ from typing import BinaryIO
 
 from minio import Minio
 
-from clients.client import DataClient
+from findrum.clients.client import DataClient
 
 
 
