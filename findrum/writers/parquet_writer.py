@@ -4,8 +4,8 @@ from typing import Final, Optional, List
 
 import pandas as pd
 
-from writers.writer import Writer
-from clients.client import DataClient
+from findrum.writers.writer import Writer
+from findrum.clients.client import DataClient
 
 
 class ParquetWriter(Writer):

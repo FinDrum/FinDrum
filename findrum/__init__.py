@@ -1,9 +1,9 @@
-from crawlers.yahoo_crawler import YahooCrawler
-from crawlers.sec_crawler import SecCrawler
-from clients.local_client import LocalDataClient as LocalClient
-from clients.minio_client import MinioDataClient as MinioClient
-from readers.parquet_reader import ParquetReader
-from writers.parquet_writer import ParquetWriter
+from findrum.crawlers.yahoo_crawler import YahooCrawler
+from findrum.crawlers.sec_crawler import SecCrawler
+from findrum.clients.local_client import LocalDataClient as LocalClient
+from findrum.clients.minio_client import MinioDataClient as MinioClient
+from findrum.readers.parquet_reader import ParquetReader
+from findrum.writers.parquet_writer import ParquetWriter
 
 __all__ = [
     "YahooCrawler",
@@ -14,5 +14,5 @@ __all__ = [
     "ParquetWriter",
 ]
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 __author__ = "Óscar Rico Rodríguez"

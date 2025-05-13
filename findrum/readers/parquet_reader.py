@@ -1,7 +1,9 @@
 import pandas as pd
 from typing import Optional, List, BinaryIO
 
-class ParquetReader:
+from findrum.readers.reader import Reader
+
+class ParquetReader(Reader):
     """
     A reader class for loading Parquet files using a storage client.
 

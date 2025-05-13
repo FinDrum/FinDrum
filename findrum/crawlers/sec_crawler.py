@@ -9,7 +9,7 @@ import pandas as pd
 import requests
 import orjson
 
-from crawlers.crawler import Crawler
+from findrum.crawlers.crawler import Crawler
 
 class SecCrawler(Crawler):
     """

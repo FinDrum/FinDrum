@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "findrum"
-version = "1.0.3"
+version = "1.0.4"
 description = "A Python package to retrieve financial data from official sources."
 authors = [{ name = "Óscar Rico Rodríguez" }]
 requires-python = ">=3.12"
