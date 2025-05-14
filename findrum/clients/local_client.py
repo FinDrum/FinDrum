@@ -2,7 +2,7 @@ import os
 from typing import BinaryIO
 from io import BytesIO
 
-from clients.client import DataClient
+from findrum.clients.client import DataClient
 
 
 class LocalDataClient(DataClient):
