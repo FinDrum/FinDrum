@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "findrum"
 version = "1.0.5"
 description = "A Python package to retrieve financial data from official sources."
+readme = { file = "README.md", content-type = "text/markdown" }
 authors = [{ name = "Óscar Rico Rodríguez" }]
 requires-python = ">=3.12"
 dependencies = [
