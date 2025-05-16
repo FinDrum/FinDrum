@@ -89,3 +89,21 @@ print(df.head())
 ```bash
 python -m pytest --cov=findrum --cov-report=term-missing
 ```
+
+---
+
+## 📄 License and Attribution
+
+This project includes components licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) and other permissive open source licenses.
+
+Portions of this software incorporate third-party libraries, including:
+
+- [`minio`](https://github.com/minio/minio-py)
+- [`yfinance`](https://github.com/ranaroussi/yfinance)
+- [`pyarrow`](https://github.com/apache/arrow)
+- [`fastparquet`](https://github.com/dask/fastparquet)
+- [`requests`](https://github.com/psf/requests)
+
+These libraries are licensed under the Apache License, Version 2.0.
+
+See the LICENSE file for full license texts and additional legal information.
